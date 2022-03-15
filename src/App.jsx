@@ -1,10 +1,47 @@
+import { useState, useEffect } from 'react';
 import './index.css';
+import { Routes, Route } from 'react-router-dom';
+
+//Components
+import Page from './components/Page';
+import Navbar from './components/Navbar';
+import Main from './components/Main';
+
+//Screens
+import Login from './Screens/Login.screen';
+import Gallery from './Screens/Gallery.screen';
+
+//Utils
+import RequireAuth from './components/RequireAuth';
+import { auth as firebaseAuth } from './firebase/auth';
+import {useAuthState} from 'react-firebase-hooks/auth';
+import useAuth from './hooks/useAuth';
 
 const App = () => {
+  const [toggle, setToggle ] = useState(false);
+  const [ user ] = useAuthState(firebaseAuth);
+  const { setAuth } = useAuth();
+
+  useEffect(() => {
+    if(user !== null) {
+      setAuth({user})
+    }
+  }, [user, setAuth])
+  
+
   return (
-    <div className="flex justify-center items-center">
-      <h1 className="text-3xl font-bold underline">WIBA GALLERY</h1>
-    </div>
+    <Page
+      header={<Navbar setToggle={setToggle} />}
+    >
+      <Main toggle={toggle} setToggle={setToggle}>
+        <Routes>
+          <Route element={<RequireAuth />}>
+            <Route path="/" element={<Gallery />} />
+          </Route>
+          <Route path='/login' element={<Login />} />
+        </Routes>
+      </Main>
+    </Page>
   );
 }
 
