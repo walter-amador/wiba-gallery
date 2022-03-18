@@ -1,19 +1,51 @@
-import { useRef, useState } from 'react';
-import ImageItem from '../components/ImageItem';
-import useOnScreen from '../hooks/useOnScreen';
-import Modal from '../components/Modal';
+import { useRef, useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
+
+//Hooks
+import useAuth from '../hooks/useAuth';
+import useOnScreen from '../hooks/useOnScreen';
+
+//Components
+import ImageItem from '../components/ImageItem';
+import Modal from '../components/Modal';
 import Upload from '../components/Upload';
 
+//Firebase
+import { getImages } from '../firebase/firestore';
+import ViewImg from '../components/ViewImg';
+
 const Gallery = () => {
+  const { auth } = useAuth();
   const ref = useRef();
   const isVisible = useOnScreen(ref);
   const [uploadImg, setUploadImg] = useState(false);
-  const [viewImg, setViewImg] = useState(false);
+  const [viewImg, setViewImg] = useState(null);
+  const [ files, setFiles ] = useState([]);
 
   const closeModal = () => {
     setUploadImg(false);
-    setViewImg(false);
+    setViewImg(null);
+  }
+
+  useEffect(() => {
+    getImages(auth.user.uid, setFiles);
+  }, []);
+
+  const handleClickImg = (id) => {
+    const img = {...files.filter((file) => file.id === id)[0]};
+    const imgIndex = files.map(files => files.id).indexOf(id)
+    
+    setViewImg({...img, imgIndex});
+  }
+  
+  const changeViewImg = (index, direction) => {
+    if((index === 0 && direction === -1) || (index === files.length -1 && direction === 1)){
+      return;
+    }
+    const nextIndex = index + direction;
+    const img = {...files[nextIndex]};
+
+    setViewImg({...img, imgIndex: nextIndex});
   }
 
   return (
@@ -41,43 +73,19 @@ const Gallery = () => {
           </div>
         </div>
       </div>
+      {
+        files.length === 0 && (
+          <h2>No images found</h2>
+        )
+      }
       <div className="grid items-center justify-items-center gap-0 grid-cols-3 md:gap-4 md:grid-cols-auto-fill transform transition-all duration-100">
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
-        <ImageItem />
+        {
+          files.map((file) => {
+            return(
+              <ImageItem key={file.id} img={file.imgURL} fileId={file.id} handleClick={handleClickImg} />
+            );
+          })
+        }
       </div>
       {
         (uploadImg || viewImg) &&
@@ -91,18 +99,7 @@ const Gallery = () => {
           }
           {
             viewImg && (
-              <div className="bg-white">
-                <div className="">
-                  <div className=""></div>
-                  <div className=""></div>
-                  <div className=""></div>
-                </div>
-                <div className="">
-                  <Icon icon="akar-icons:info-fill"/>
-                  <Icon icon="fluent:delete-24-filled"/>
-                  <Icon icon="fa-solid:download"/>
-                </div>
-              </div>
+              <ViewImg closeModal={closeModal} viewImg={viewImg} changeViewImg={changeViewImg} />
             )
           }
         </Modal>

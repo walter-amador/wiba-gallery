@@ -20,7 +20,7 @@ const Modal = ({bgClick,children}) => {
     
   return (
     <section ref={modal} style={{backgroundColor: 'rgba(0,0,0,0.2)'}} className='fixed z-10 inset-0 flex justify-center items-center'>
-        <button type='button' className="bg-white rounded-full p-2 absolute top-16 right-16" onClick={handleClose} >
+        <button type='button' className="bg-white rounded-full shadow-md z-10 p-2 absolute top-6 right-2 md:top-16 md:right-16" onClick={handleClose} >
             <Icon icon="ep:close"/>
         </button>
         {children}
