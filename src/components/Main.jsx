@@ -38,12 +38,12 @@ const Main = ({toggle, setToggle, children}) => {
                     <SideBarItem
                         icon="ic:baseline-privacy-tip" 
                         desc="Terms and conditions" 
-                        func={() => navigate('/conditions')}
+                        func={() => navigate('/terms-and-conditions')}
                     />
                     <SideBarItem
                         icon="icon-park-outline:personal-privacy" 
                         desc="Privacy policy" 
-                        func={() => navigate('/privacy')}
+                        func={() => navigate('/privacy-policy')}
                     />
                     <SideBarItem
                         icon="fluent:contact-card-16-regular" 
