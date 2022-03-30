@@ -50,6 +50,11 @@ const Main = ({toggle, setToggle, children}) => {
                         desc="Developers" 
                         func={() => navigate('/developers')}
                     />
+                    <SideBarItem
+                        icon="fluent:learning-app-24-regular" 
+                        desc="Tutorials" 
+                        func={() => navigate('/tutorials')}
+                    />
                     {
                         auth?.user &&
                         <SideBarItem
