@@ -21,11 +21,18 @@ const Main = ({toggle, setToggle, children}) => {
             <div className={`${toggle ? 'w-full md:w-1/5' : 'w-0'} overflow-hidden transform transition-all duration-200 shadow-lg shadow-slate-700`}>
                 <ul className="px-2 py-4">
                     { auth?.user &&
+                        <>
                         <SideBarItem
                             icon="clarity:image-gallery-solid" 
                             desc="My Gallery" 
                             func={() => navigate('/')}
                         />
+                        <SideBarItem
+                            icon="foundation:graph-trend" 
+                            desc="Statistics" 
+                            func={() => navigate('/statistics')}
+                        />
+                        </>
                     }
                     { !auth?.user &&
                         <SideBarItem

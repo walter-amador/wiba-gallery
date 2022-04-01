@@ -20,6 +20,7 @@ import RequireAuth from './components/RequireAuth';
 import { auth as firebaseAuth } from './firebase/auth';
 import {useAuthState} from 'react-firebase-hooks/auth';
 import useAuth from './hooks/useAuth';
+import Statistics from './Screens/Statistics.screen';
 
 const App = () => {
   const [toggle, setToggle ] = useState(false);
@@ -41,6 +42,7 @@ const App = () => {
         <Routes>
           <Route element={<RequireAuth />}>
             <Route path="/" element={<Gallery />} />
+            <Route path='/statistics' element={<Statistics />} />
           </Route>
           <Route path='/login' element={<Login />} />
           <Route path='/terms-and-conditions' element={<TermsConditions />} />
