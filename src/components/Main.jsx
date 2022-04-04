@@ -59,7 +59,7 @@ const Main = ({toggle, setToggle, children}) => {
                     />
                     <SideBarItem
                         icon="fluent:learning-app-24-regular" 
-                        desc="Tutorials" 
+                        desc="Tutorials & FAQ" 
                         func={() => navigate('/tutorials')}
                     />
                     {
