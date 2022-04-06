@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Icon } from '@iconify/react';
 
+//modal
 const Modal = ({bgClick,children}) => {
     const modal = useRef(null);
 
