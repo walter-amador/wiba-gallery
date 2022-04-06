@@ -18,7 +18,7 @@ import {
 
 const RADIAN = Math.PI / 180;
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-
+//Functional Statistics
 const Statistics = () => {
     const [files, setFiles] = useState([]);
     const [data, setData] = useState([]);
