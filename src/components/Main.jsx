@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import SideBarItem from './SideBarItem';
 
+//main
 const Main = ({toggle, setToggle, children}) => {
     const { auth, setAuth } = useAuth();
     
