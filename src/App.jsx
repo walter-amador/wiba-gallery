@@ -21,7 +21,7 @@ import { auth as firebaseAuth } from './firebase/auth';
 import {useAuthState} from 'react-firebase-hooks/auth';
 import useAuth from './hooks/useAuth';
 import Statistics from './Screens/Statistics.screen';
-
+//This is the new gallery app
 const App = () => {
   const [toggle, setToggle ] = useState(false);
   const [ user ] = useAuthState(firebaseAuth);
