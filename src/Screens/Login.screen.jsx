@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { auth as firebaseAuth, provider } from '../firebase/auth';
 import useAuth from '../hooks/useAuth';
 
+//login
 const Login = () => {
     const { auth, setAuth } = useAuth();
     const navigate = useNavigate();
