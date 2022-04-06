@@ -1,16 +1,16 @@
 import { useRef, useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
 
-//Hooks
+//Hooks.
 import useAuth from '../hooks/useAuth';
 import useOnScreen from '../hooks/useOnScreen';
 
-//Components
+//Components.
 import ImageItem from '../components/ImageItem';
 import Modal from '../components/Modal';
 import Upload from '../components/Upload';
 
-//Firebase
+//Firebase.
 import { getImages } from '../firebase/firestore';
 import ViewImg from '../components/ViewImg';
 

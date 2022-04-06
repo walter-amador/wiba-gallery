@@ -10,7 +10,7 @@ export default function useOnScreen(ref) {
   
     useEffect(() => {
       observer.observe(ref.current)
-      // Remove the observer as soon as the component is unmounted
+      // Remove the observer as soon as the component is unmounted.
       return () => { observer.disconnect() }
     }, []);
   
