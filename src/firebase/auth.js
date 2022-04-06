@@ -3,7 +3,7 @@ import { app } from '../firebase';
 
 export const provider = new GoogleAuthProvider();
 
-//authentication
+//authentication.
 export const auth = getAuth(app);
 
 export const isUserLogged = () => {
