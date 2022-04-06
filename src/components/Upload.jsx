@@ -5,6 +5,8 @@ import { storage } from '../firebase/storage';
 import useAuth from '../hooks/useAuth';
 import { sendFile } from '../firebase/firestore';
 
+
+//upload
 const Upload = () => {
     const [image, setImage] = useState(null);
     const [uploading, setUploading] = useState(null);
